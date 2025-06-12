@@ -1,0 +1,5 @@
+# .dockerignore
+bin/
+*.exe
+*.out
+*.log
