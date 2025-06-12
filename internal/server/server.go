@@ -6,12 +6,14 @@ import (
 )
 
 func Start(port string) {
-	address := ":8080"
-	ln, err := net.Listen("tcp", address)
+	ln, err := net.Listen("tcp", port)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error:", err)
+		return
 	}
-	fmt.Println("Server listening on", address)
+	defer ln.Close()
+	fmt.Println("Server listening on", port)
+
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
@@ -20,9 +22,17 @@ func Start(port string) {
 		}
 		go handleConnection(conn)
 	}
-
 }
 
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
+
+	buf := make([]byte, 1024)
+	n, err := conn.Read(buf)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	fmt.Println(string(buf[:n]))
+	fmt.Fprintf(conn, "Echo - "+string(buf[:n]))
 }
