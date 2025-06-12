@@ -27,15 +27,18 @@ To run the project, run the following commands:
 git clone "https://github.com/Thales3006/socket-ip-calc"
 cd socket-ip-calc
 ```
-- **Build** the server
+- **Run** and **Build** the server
 ```bash
-# building
-docker build -t socket-ip-calc .
+# running server process:
+# repeat this command if you want to
+# rebuild the server (no need to shutdown before it)
+docker-compose up --build -d 
+# if you wish to stop the server:
+# docker-compose down
 ```
-- **Run** the server and client
+
+- **Run** the client
 ```bash
-# running server
-docker run -p 8080:8080 socket-ip-calc
 # running client
 go run cmd/client/main.go
 ```
