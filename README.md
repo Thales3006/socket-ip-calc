@@ -1,6 +1,6 @@
 # Socket IP Sub-Network Calculator
 
-This is an university project made to test and understand the use of **sockets** for **Network** class.
+This is a university project made to test and understand the use of **sockets** for **Network** class.
 Our objective is to make a **calculator for IP sub-networks** using a **client and server socket architeture**.
 
 The project work as the following steps:
