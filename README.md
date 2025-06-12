@@ -28,6 +28,7 @@ git clone "https://github.com/Thales3006/socket-ip-calc"
 cd socket-ip-calc
 ```
 - **Run** and **Build** the server
+
   you can repeat this command if you wish to rebuild the server (no need to shutdown before it).
 ```bash
 # running server process:
