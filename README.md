@@ -5,7 +5,7 @@ Our objective is to make a **calculator for IP sub-networks** using a **client a
 
 The project works as follows:
 + **Client** connects to **Server**
-+ **Client** send an **IP**, **Mask** and the **number of sub-networks**
++ **Client** sends an **IP**, **Mask** and the **number of sub-networks**
 + **Server** process the information and returns the **sub-network address** and **mask**, **starting address** and **end address**.
 
 ## Tools and Dependencies
