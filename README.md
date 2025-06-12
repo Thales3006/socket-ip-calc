@@ -20,7 +20,7 @@ Before using the project ensure you have installed:
 - [Docker](https://www.docker.com)
 ## Running
 
-To run the project  run the following commands:
+To run the project, run the following commands:
 
 - **Install** the project and **go into** the root folder
 ```bash
