@@ -27,5 +27,5 @@ func Connect(address string) {
 		return
 	}
 
-	fmt.Println(string(buf[:n]))
+	handleOutput(string(buf[:n]))
 }

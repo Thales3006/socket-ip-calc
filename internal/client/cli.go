@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+
+	"github.com/fatih/color"
 )
 
 func handleInput() (string, error) {
@@ -13,23 +15,28 @@ func handleInput() (string, error) {
 	var mask string
 	var amount string
 
-	fmt.Print("IP: ")
+	color.RGB(255, 255, 255).Print("IP: ")
 	fmt.Scan(&ip)
 	if !ip_regex.MatchString(ip) {
 		return "", errors.New("not able to parse IP")
 	}
 
-	fmt.Print("Mask: ")
+	color.RGB(255, 255, 255).Print("Mask: ")
 	fmt.Scan(&mask)
 	if !number_regex.MatchString(mask) {
 		return "", errors.New("not able to parse mask")
 	}
 
-	fmt.Print("Sub-network amount:")
+	color.RGB(255, 255, 255).Print("Sub-network amount: ")
 	fmt.Scan(&amount)
 	if !number_regex.MatchString(amount) {
 		return "", errors.New("not able to parse amount")
 	}
 
 	return ip + "\n" + mask + "\n" + amount, nil
+}
+
+func handleOutput(output string) {
+	d := color.New(color.FgCyan, color.Bold)
+	d.Println("\n" + output)
 }
