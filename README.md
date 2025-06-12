@@ -11,7 +11,7 @@ The project works as follows:
 ## Tools and Dependencies
 
 The project uses [golang](https://go.dev) as the main language for building the server inner functionality.
-[Docker](https://www.docker.com) was also used the run the server in a separated environment. 
+[Docker](https://www.docker.com) was also used to run the server in a separate environment. 
 
 ### Dependencies
 
