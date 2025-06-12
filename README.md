@@ -3,7 +3,7 @@
 This is a university project made to test and understand the use of **sockets** for **Network** class.
 Our objective is to make a **calculator for IP sub-networks** using a **client and server socket architeture**.
 
-The project work as the following steps:
+The project works as follows:
 + **Client** connects to **Server**
 + **Client** send an **IP**, **Mask** and the **number of sub-networks**
 + **Server** process the information and returns the **sub-network address** and **mask**, **starting address** and **end address**.
