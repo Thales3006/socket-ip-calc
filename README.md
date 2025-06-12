@@ -28,10 +28,9 @@ git clone "https://github.com/Thales3006/socket-ip-calc"
 cd socket-ip-calc
 ```
 - **Run** and **Build** the server
+  you can repeat this command if you wish to rebuild the server (no need to shutdown before it).
 ```bash
 # running server process:
-# repeat this command if you want to
-# rebuild the server (no need to shutdown before it)
 docker-compose up --build -d 
 # if you wish to stop the server:
 # docker-compose down
@@ -39,6 +38,6 @@ docker-compose up --build -d
 
 - **Run** the client
 ```bash
-# running client
+# running client:
 go run cmd/client/main.go
 ```
