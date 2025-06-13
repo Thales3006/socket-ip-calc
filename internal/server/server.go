@@ -40,7 +40,7 @@ func handleConnection(conn net.Conn) {
 			if err == io.EOF {
 				fmt.Println("Client has disconnected.")
 			} else {
-				fmt.Println("Erro:", err)
+				fmt.Println("Error:", err)
 			}
 			return
 		}

@@ -101,16 +101,16 @@ func getContinue() bool {
 	yes := regexp.MustCompile(`^(y|Y|yes|Yes)$`)
 	no := regexp.MustCompile(`^(n|N|no|No)$`)
 
-	text_color.Print("Wish to continue [Yes or No]? ")
-	decision, _ := utils.Read(reader)
 	for {
+		text_color.Print("Wish to continue [Yes or No]? ")
+		decision, _ := utils.Read(reader)
 		if yes.MatchString(decision) {
 			return true
 		}
 		if no.MatchString(decision) {
 			return false
 		}
-		text_color.Print("Please, insert a valid option.")
+		text_color.Println("Please, insert a valid option.")
 	}
 }
 
