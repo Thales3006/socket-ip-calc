@@ -29,7 +29,7 @@ cd socket-ip-calc
 ```
 - **Run** and **Build** the server
 
-  you can repeat this command if you wish to rebuild the server (no need to shutdown before it).
+  You can repeat this command if you wish to rebuild the server (no need to shutdown before it).
 ```bash
 # running server process:
 docker-compose up --build -d 
@@ -42,3 +42,7 @@ docker-compose up --build -d
 # running client:
 go run cmd/client/main.go
 ```
+### Internal login
+The default *username* and *password* to login in the server are:
+- **Username:** Admin
+- **Password:** 12345
