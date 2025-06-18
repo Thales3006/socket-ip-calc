@@ -55,12 +55,11 @@ func handleCli(conn net.Conn) {
 }
 
 func getCalcInput() (string, error) {
-	ip_regex := regexp.MustCompile(`^(\d{1,3}(\.\d{1,3}){3})|(([[[:xdigit:]]]{1,4}:){7,7}[[:xdigit:]]{1,4}|([[:xdigit:]]{1,4}:){1,7}:|([[:xdigit:]]{1,4}:){1,6}:[[:xdigit:]]{1,4}|([[:xdigit:]]{1,4}:){1,5}(:[[:xdigit:]]{1,4}){1,2}|([[:xdigit:]]{1,4}:){1,4}(:[[:xdigit:]]{1,4}){1,3}|([[:xdigit:]]{1,4}:){1,3}(:[[:xdigit:]]{1,4}){1,4}|([[:xdigit:]]{1,4}:){1,2}(:[[:xdigit:]]{1,4}){1,5}|[[:xdigit:]]{1,4}:((:[[:xdigit:]]{1,4}){1,6})|:((:[[:xdigit:]]{1,4}){1,7}|:)|fe80:(:[[:xdigit:]]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([[:xdigit:]]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))|([[:xdigit:]]{1,4}(:[[:xdigit:]]{1,4}){1,7})$`)
 	number_regex := regexp.MustCompile(`^\d+$`)
 
 	text_color.Print("IP: ")
 	ip, _ := utils.Read(reader)
-	if !ip_regex.MatchString(ip) {
+	if !utils.IsIpv4(ip) && !utils.IsIpv6(ip) {
 		return "", errors.New("not able to parse IP")
 	}
 
