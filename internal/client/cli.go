@@ -59,7 +59,8 @@ func getCalcInput() (string, error) {
 
 	text_color.Print("IP: ")
 	ip, _ := utils.Read(reader)
-	if !utils.IsIpv4(ip) && !utils.IsIpv6(ip) {
+	_, err := utils.EvalIp(ip)
+	if err != nil {
 		return "", errors.New("not able to parse IP")
 	}
 
