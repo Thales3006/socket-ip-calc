@@ -47,8 +47,8 @@ func Calculate(ip []uint16, mask int, amount int) (ips [][3][]uint16, err error)
 
 	lastHost[firstIndexSubhost] |= (1<<(firstBitSubhost+1))-1
 
-	fmt.Println(ip, firstIndexHost, firstBitHost, firstIndexSubhost, firstBitSubhost)
-	fmt.Println(ip[firstIndexHost], ip[firstIndexHost]&((1<<(firstBitHost+1))-1)!=0)
+	log.Printf("Debug: ip=%v, firstIndexHost=%d, firstBitHost=%d, firstIndexSubhost=%d, firstBitSubhost=%d", ip, firstIndexHost, firstBitHost, firstIndexSubhost, firstBitSubhost)
+	log.Printf("Debug: ip[firstIndexHost]=%d, condition=%v", ip[firstIndexHost], ip[firstIndexHost]&((1<<(firstBitHost+1))-1) != 0)
 
 	for i:=firstIndexSubhost+1; i<len(lastHost); i++ {
 		lastHost[i] |= (1<<elSize) - 1
