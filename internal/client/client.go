@@ -34,7 +34,10 @@ func handleServerMessage(serverReader *bufio.Reader) (status, error) {
 		fmt.Println("Error:", err)
 		return EXIT, err
 	}
-	switch strings.Split(message, ";")[0] {
+
+	parts := strings.Split(message, ";")
+
+	switch parts[0] {
 	case "LOGIN_OK":
 		showOutput("Login was successful!")
 		return LOGGED, nil
@@ -45,7 +48,14 @@ func handleServerMessage(serverReader *bufio.Reader) (status, error) {
 		showOutput("You are still not logged in!")
 		return NOT_LOGGED, nil
 	case "CALC":
-		showOutput("Resulting calculation: \n" + message)
+		result := "Resulting calculation: \n"
+		for i := 2; i+2 < len(parts); i += 3 {
+			result += parts[i] + "/" + parts[1] + "\t" + parts[i+1] + " - " + parts[i+2] + "\n"
+		}
+		showOutput(result)
+		return LOGGED, nil
+	case "ERROR":
+		showOutput(parts[1])
 		return LOGGED, nil
 	default:
 		showOutput("Error!")

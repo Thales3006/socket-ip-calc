@@ -8,6 +8,7 @@ import (
 	"os"
 	"regexp"
 	"socket-ip-calc/internal/utils"
+	"strconv"
 
 	"github.com/fatih/color"
 )
@@ -55,25 +56,46 @@ func handleCli(conn net.Conn) {
 }
 
 func getCalcInput() (string, error) {
-	ip_regex := regexp.MustCompile(`^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`)
-	number_regex := regexp.MustCompile(`^\d+$`)
-
 	text_color.Print("IP: ")
 	ip, _ := utils.Read(reader)
-	if !ip_regex.MatchString(ip) {
+	ipArr, err := utils.EvalIp(ip)
+	if err != nil {
 		return "", errors.New("not able to parse IP")
 	}
+	
+	isIpv4 := len(ipArr)==4
 
-	text_color.Print("Mask: ")
+	if isIpv4 {
+		text_color.Print("IPV4\nMask (16 - 29): ")
+	} else {
+		text_color.Print("IPV6\nMask (48 - 62): ")
+	}
+
 	mask, _ := utils.Read(reader)
-	if !number_regex.MatchString(mask) {
+	var maskInt int
+	maskInt, err = strconv.Atoi(mask)
+	if err != nil {
 		return "", errors.New("not able to parse mask")
 	}
 
-	text_color.Print("Sub-network amount: ")
+	if !utils.ValidateMask(maskInt, isIpv4) {
+		return "", errors.New("invalid mask")
+	}
+
+	if isIpv4 {
+		text_color.Printf("Sub-network amount (1 - %d): ", 1<<(31-maskInt))
+	} else {
+		text_color.Printf("Sub-network amount: ")
+	}
+
 	amount, _ := utils.Read(reader)
-	if !number_regex.MatchString(amount) {
+	var amountInt int
+	amountInt, err = strconv.Atoi(amount)
+	if err!=nil {
 		return "", errors.New("not able to parse amount")
+	}
+	if !utils.ValidateAmount(amountInt, maskInt, isIpv4) {
+		return "", errors.New("invalid amount")
 	}
 
 	return "CALC;" + ip + ";" + mask + ";" + amount + "\n", nil
