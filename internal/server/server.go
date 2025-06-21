@@ -7,8 +7,8 @@ import (
 	"math"
 	"net"
 	"socket-ip-calc/internal/utils"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 func Start(port string) {
@@ -71,25 +71,24 @@ func handleConnection(conn net.Conn) {
 
 			if err != nil {
 				fmt.Println("Error (ip): ", err)
-				conn.Write([]byte("invalid ip"))
+				conn.Write([]byte("ERROR;invalid ip\n"))
 				continue
 			}
 
 			fmt.Printf("ip %s is valid\n", parts[1])
-
 
 			var mask int
 			mask, err = strconv.Atoi(parts[2])
 
 			if err != nil {
 				fmt.Println("Error (mask): ", err)
-				conn.Write([]byte("invalid mask"))
+				conn.Write([]byte("ERROR;invalid mask\n"))
 				continue
 			}
 
 			if !utils.ValidateMask(mask, isIpv4) {
 				fmt.Println("Error: invalid mask")
-				conn.Write([]byte("invalid mask"))
+				conn.Write([]byte("ERROR;invalid mask\n"))
 				continue
 			}
 
@@ -100,13 +99,13 @@ func handleConnection(conn net.Conn) {
 
 			if err != nil {
 				fmt.Println("Error (mask): ", err)
-				conn.Write([]byte("invalid amount"))
+				conn.Write([]byte("ERROR;invalid amount"))
 				continue
 			}
 
 			if !utils.ValidateAmount(amount, mask, isIpv4) {
 				fmt.Println("Error (amount): invalid amount")
-				conn.Write([]byte("invalid amount"))
+				conn.Write([]byte("ERROR;invalid amount\n"))
 				continue
 			}
 
@@ -114,19 +113,19 @@ func handleConnection(conn net.Conn) {
 
 			var networks [][3][]uint16
 			networks, err = Calculate(ip, mask, amount)
-		 	
+
 			if err != nil {
 				fmt.Println("Error (calculation): ", err)
-				conn.Write([]byte("invalid calculation"))
+				conn.Write([]byte("ERROR;invalid calculation\n"))
 				continue
 			}
 
-			result := ";" + strconv.FormatInt(int64(mask) + int64(math.Log2(float64(amount))), 10)
+			result := ";" + strconv.FormatInt(int64(mask)+int64(math.Log2(float64(amount))), 10)
 			var ipStr string
 
 			for _, subnetwork := range networks {
 
-				for i:=0; i<3; i++ {
+				for i := 0; i < 3; i++ {
 					ipStr, err = utils.StringifyIp(subnetwork[i])
 					if err != nil {
 						break
@@ -141,7 +140,7 @@ func handleConnection(conn net.Conn) {
 
 			if err != nil {
 				fmt.Println("Error (string calculation): ", err)
-				conn.Write([]byte("invalid calculation"))
+				conn.Write([]byte("ERROR;invalid calculation\n"))
 				continue
 			}
 

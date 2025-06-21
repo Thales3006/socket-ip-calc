@@ -49,10 +49,13 @@ func handleServerMessage(serverReader *bufio.Reader) (status, error) {
 		return NOT_LOGGED, nil
 	case "CALC":
 		result := "Resulting calculation: \n"
-		for i:=2; i+2<len(parts); i+=3 {
+		for i := 2; i+2 < len(parts); i += 3 {
 			result += parts[i] + "/" + parts[1] + "\t" + parts[i+1] + " - " + parts[i+2] + "\n"
 		}
 		showOutput(result)
+		return LOGGED, nil
+	case "ERROR":
+		showOutput(parts[1])
 		return LOGGED, nil
 	default:
 		showOutput("Error!")
